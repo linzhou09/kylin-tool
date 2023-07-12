@@ -2,10 +2,10 @@ package com.kylin.lock.aspect;
 
 
 
+import com.kylin.biz.utils.exception.BizException;
 import com.kylin.lock.annotations.Lock;
 import com.kylin.lock.model.enums.LockErrorResultCodeEnums;
 import com.kylin.lock.model.result.BaseLockResult;
-import com.wwl.zouwu.oms.framework.result.exception.BusinessException;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -49,7 +49,7 @@ public class LockAspect {
         try {
             if (Objects.isNull(lockResultBo)) {
                 log.error("分布式锁获取失败，redisKey：{}", redisKey);
-                throw new BusinessException(LockErrorResultCodeEnums.FREQUENT);
+                throw new BizException(LockErrorResultCodeEnums.FREQUENT);
             } else {
                 log.info("分布式锁获取成功，redisKey：{}", redisKey);
             }

@@ -1,5 +1,6 @@
 package com.kylin.lock.model.enums;
 
+import com.kylin.biz.utils.model.bo.exception.ExceptionResultCode;
 import lombok.Getter;
 
 /**
@@ -14,13 +15,13 @@ import lombok.Getter;
  * @since : 1.0
  */
 @Getter
-public enum LockErrorResultCodeEnums{
+public enum LockErrorResultCodeEnums implements ExceptionResultCode {
 
   /**
    * 成功
    */
-  FREQUENT("900001", "请求太频繁了,请稍后再试", "success"),
-  NOT_FIND_PARAM_VALUE("900002", "分布式锁key获取失败，找不到参数：%s", "success"),
+  FREQUENT("900001", "请求太频繁了,请稍后再试"),
+  NOT_FIND_PARAM_VALUE("900002", "分布式锁key获取失败，找不到参数：%s"),
   /****************************************************************************/
   ;
 
@@ -32,11 +33,11 @@ public enum LockErrorResultCodeEnums{
   /**
    * 中文返回信息描述
    */
-  private String zhMessage;
+  private String message;
 
-  LockErrorResultCodeEnums(String code, String zhMessage, String enMessage) {
+  LockErrorResultCodeEnums(String code, String message) {
     this.code = code;
-    this.zhMessage = zhMessage;
+    this.message = message;
   }
 
   /**
@@ -46,7 +47,7 @@ public enum LockErrorResultCodeEnums{
    */
   public String getMessage() {
 
-    return zhMessage;
+    return message;
   }
 
   public String getCode() {
@@ -59,11 +60,11 @@ public enum LockErrorResultCodeEnums{
   }
 
   public String getZhMessage() {
-    return zhMessage;
+    return message;
   }
 
   public LockErrorResultCodeEnums setZhMessage(String zhMessage) {
-    this.zhMessage = zhMessage;
+    this.message = zhMessage;
     return this;
   }
 
