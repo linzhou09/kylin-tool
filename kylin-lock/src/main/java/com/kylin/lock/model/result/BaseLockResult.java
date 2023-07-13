@@ -1,7 +1,8 @@
 package com.kylin.lock.model.result;
 
 
-import com.wwl.zouwu.oms.framework.lock.param.LockContext;
+
+import com.kylin.lock.model.param.LockContext;
 
 import java.io.Closeable;
 import java.io.IOException;

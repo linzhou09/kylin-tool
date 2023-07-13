@@ -98,7 +98,7 @@ public class ReflectUtil {
      * @param args
      * @return
      */
-    private static List<KylinParamInfo> getKylinParamInfos(Object... args) {
+    public static List<KylinParamInfo> getKylinParamInfos(Object... args) {
 
         if (Objects.isNull(args) || args.length == 0) {
             return new ArrayList<>();
@@ -118,7 +118,7 @@ public class ReflectUtil {
      * @param arg
      * @return
      */
-    private static List<KylinParamInfo> getKylinParamInfos(Object arg) {
+    public static List<KylinParamInfo> getKylinParamInfos(Object arg) {
         List<KylinParamInfo> rlt = new ArrayList<>();
         List<ReflectField> allFieldAndValue = ReflectUtil.getReflectField(arg);
         for (ReflectField reflectField : allFieldAndValue) {

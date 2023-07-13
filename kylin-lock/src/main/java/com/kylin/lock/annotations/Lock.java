@@ -1,6 +1,11 @@
 package com.kylin.lock.annotations;
 
 
+import com.kylin.lock.core.key.DefaultDistributedKey;
+import com.kylin.lock.core.key.DistributedKey;
+import com.kylin.lock.core.lock.DistributedLock;
+import com.kylin.lock.core.lock.RedisDistributedLock;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

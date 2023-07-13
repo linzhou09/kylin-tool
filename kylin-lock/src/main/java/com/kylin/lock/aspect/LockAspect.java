@@ -4,9 +4,13 @@ package com.kylin.lock.aspect;
 
 import com.kylin.biz.utils.exception.BizException;
 import com.kylin.lock.annotations.Lock;
+import com.kylin.lock.core.key.DistributedKey;
+import com.kylin.lock.core.lock.DistributedLock;
 import com.kylin.lock.model.enums.LockErrorResultCodeEnums;
+import com.kylin.lock.model.param.LockContext;
 import com.kylin.lock.model.result.BaseLockResult;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections4.CollectionUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -15,6 +19,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -35,8 +40,8 @@ public class LockAspect {
             return joinPoint.proceed();
         }
         //获取分布式锁的key
-        String[] redisKey = getRedisKey(joinPoint, lock);
-        if (StringUtils.isEmpty(redisKey)) {
+        List<String> redisKey = getRedisKey(joinPoint, lock);
+        if (CollectionUtils.isEmpty(redisKey)) {
             log.error("未获取到分布式锁key,跳过加锁逻辑，redisKey：{}", redisKey);
             return joinPoint.proceed();
         }
@@ -70,11 +75,7 @@ public class LockAspect {
      * @return
      * @throws Throwable
      */
-    private String[] getRedisKey(ProceedingJoinPoint joinPoint, Lock lock) throws Throwable {
-        String[] key = lock.key();
-        if (StringUtils.isEmpty(key)) {
-            return key;
-        }
+    private List<String> getRedisKey(ProceedingJoinPoint joinPoint, Lock lock) throws Throwable {
 
         DistributedKey distributedKey = applicationContext.getBean(lock.lockKeyType());
 

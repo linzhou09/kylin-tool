@@ -31,6 +31,15 @@ public class StringFormatUtil {
   public static final Pattern FIELD_NAME_PATTERN = Pattern.compile("\\{.*?}");
 
 
+  public static List<String> buildDistributedKeyList(List<String> keyList, List<KylinParamInfo> kylinParamInfoList){
+
+    List<String> distributedKeyList = new ArrayList<>();
+    for (String key : keyList) {
+      distributedKeyList.add(buildDistributedKey(key, kylinParamInfoList));
+    }
+    return distributedKeyList;
+  }
+
   public static String buildDistributedKey(String key, List<KylinParamInfo> kylinParamInfoList) {
     //获取key中变量
     Set<String> fieldNames = getParamNamesByKey(key);
@@ -62,6 +71,18 @@ public class StringFormatUtil {
     }
     return distributedLockKey;
   }
+
+
+  public static  Set<String> getParamNamesByKeys(List<String> keys) {
+    Set<String> fieldNames = new HashSet<>();
+
+    for (String key : keys) {
+      fieldNames.addAll(getParamNamesByKey(key));
+    }
+
+    return fieldNames;
+  }
+
 
   /**
    * 获取key中变量
