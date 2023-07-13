@@ -12,6 +12,7 @@
         <module>kylin-http-client</module>
         <module>kylin-lock</module>
         <module>kylin-biz-utils</module>
+        <module>kylin-biz-spring</module>
     </modules>
 
     <properties>
