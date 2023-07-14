@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * CopyRight : <company domain>
- * Project :  zouwu-oms-framework
+ * Project :  kylin-tool
  * Comments : <对此类的描述，可以引用系统设计中的描述>
  * JDK version : JDK1.8
  * Create Date : 2023-02-02 09:58
