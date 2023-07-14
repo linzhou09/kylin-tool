@@ -1,9 +1,7 @@
 package com.kylin.http.client.biz.config;
 
 
-
 import com.kylin.biz.utils.date.DateUtil;
-import com.kylin.http.client.biz.client.DownloadFileClient;
 import com.kylin.http.client.biz.constant.HttpClientConstant;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -20,7 +18,7 @@ import java.util.Objects;
  */
 @Component
 @ConfigurationProperties(prefix = "httpclient")
-@ComponentScan(basePackages = "com.kylin.http.client.biz", basePackageClasses = DownloadFileClient.class)
+@ComponentScan(basePackages = "com.kylin.http.client.biz")
 @Data
 public class HttpClientConfig {
 

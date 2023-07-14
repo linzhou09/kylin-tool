@@ -1,4 +1,4 @@
-package com.kylin.http.client.biz.client;
+package com.kylin.http.client.client;
 
 
 

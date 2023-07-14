@@ -2,7 +2,6 @@ package com.kylin.http.client.client;
 
 
 import com.alibaba.fastjson.JSON;
-import com.kylin.http.client.biz.client.DownloadFileClient;
 import com.kylin.http.client.biz.context.url.HttpRequestUrl;
 import com.kylin.http.client.biz.response.HttpResult;
 import com.kylin.http.client.controller.DownloadFileParam;
