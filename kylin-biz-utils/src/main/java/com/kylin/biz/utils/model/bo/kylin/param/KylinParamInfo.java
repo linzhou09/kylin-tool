@@ -5,7 +5,7 @@ import com.kylin.biz.utils.common.annotations.KylinParam;
 
 /**
  * CopyRight : <company domain>
- * Project :  zouwu-oms-framework
+ * Project :  kylin-tool
  * Comments : 字段解析信息
  * JDK version : JDK1.8
  * Create Date : 2023-06-26 14:46

@@ -5,7 +5,7 @@ import lombok.Getter;
 
 /**
  * CopyRight (c) : www.wwlcargo.com
- * Project :  zouwu-oms-framework
+ * Project :  kylin-tool
  * Comments : ResultInfoEnums
  * JDK version : JDK1.8
  * Create Date : 2021/11/21 14:50

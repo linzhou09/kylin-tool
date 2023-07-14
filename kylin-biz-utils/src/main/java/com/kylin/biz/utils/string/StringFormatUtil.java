@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 /**
  * CopyRight : <company domain>
- * Project :  zouwu-oms-framework
+ * Project :  kylin-tool
  * Comments : 字符串格式化工具类
  * JDK version : JDK1.8
  * Create Date : 2023-06-26 14:43

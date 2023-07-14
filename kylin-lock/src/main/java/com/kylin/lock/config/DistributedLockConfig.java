@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * CopyRight : <company domain>
- * Project :  zouwu-oms-framework
+ * Project :  kylin-tool
  * Comments : <对此类的描述，可以引用系统设计中的描述>
  * JDK version : JDK1.8
  * Create Date : 2022-05-30 14:48
