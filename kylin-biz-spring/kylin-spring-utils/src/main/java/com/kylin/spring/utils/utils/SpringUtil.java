@@ -1,4 +1,4 @@
-package com.kylin.biz.spring.utils;
+package com.kylin.spring.utils.utils;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;

@@ -1,6 +1,6 @@
-package com.kylin.biz.spring.config;
+package com.kylin.spring.utils.config;
 
-import com.kylin.biz.spring.utils.SpringUtil;
+import com.kylin.spring.utils.utils.SpringUtil;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
