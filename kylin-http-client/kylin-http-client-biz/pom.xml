@@ -18,20 +18,22 @@
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <kylin-biz-utils.version>1.0-SNAPSHOT</kylin-biz-utils.version>
+        <kylin-spring-utils.version>1.0-SNAPSHOT</kylin-spring-utils.version>
     </properties>
 
     <dependencies>
         <dependency>
-            <groupId>com.kylin.biz.utils</groupId>
+            <groupId>com.kylin.utils</groupId>
             <artifactId>kylin-biz-utils</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${kylin-biz-utils.version}</version>
         </dependency>
 
 
         <dependency>
-            <groupId>com.kylin.biz.spring</groupId>
+            <groupId>com.kylin.spring</groupId>
             <artifactId>kylin-spring-utils</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${kylin-spring-utils.version}</version>
         </dependency>
     </dependencies>
 

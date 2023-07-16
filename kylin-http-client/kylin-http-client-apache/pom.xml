@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.kylin.biz.spring</groupId>
+        <groupId>com.kylin.spring</groupId>
         <artifactId>kylin-spring-parent</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
@@ -17,13 +17,14 @@
         <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <httpmime.version>4.5.13</httpmime.version>
+        <kylin-http-client-biz.version>1.0-SNAPSHOT</kylin-http-client-biz.version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>com.kylin.http.client</groupId>
             <artifactId>kylin-http-client-biz</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${kylin-http-client-biz.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
