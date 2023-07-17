@@ -21,103 +21,103 @@ import java.nio.charset.StandardCharsets;
 @Log4j2
 public class HttpClientTest extends BaseTest {
 
-  public static final String PROPERTY_URL = "http.client.property-url";
+    public static final String PROPERTY_URL = "http.client.property-url";
 
-  @Autowired
-  private HttpTestClient httpTestClient;
-  @Autowired
-  private HttpPropertyTestClient httpPropertyTestClient;
-  @Autowired
-  private DownloadFileClient httpDownloadClient;
+    @Autowired
+    private HttpTestClient httpTestClient;
+    @Autowired
+    private HttpPropertyTestClient httpPropertyTestClient;
+    @Autowired
+    private DownloadFileClient httpDownloadClient;
 
-  /**
-   * post 请求
-   */
-  @Test
-  public void postTest() {
-    LoginParam p = new LoginParam();
-    p.setPassword("12345678");
-    p.setName("src/main/resources/httpClient");
-    HttpResult<LoginParam> param = httpPropertyTestClient.postLogin(p);
-    log.info("rlt1:" + JSON.toJSONString(param));
-    String rlt = httpTestClient.postLogin(p);
-    log.info("rlt1:" + rlt);
-  }
-
-  /**
-   * post 请求
-   */
-  @Test
-  public void getDouble() {
-    double rlt = httpTestClient.getDouble();
-    log.info("rlt1:" + rlt);
-  }
-
-  /**
-   * get 请求
-   */
-  @Test
-  public void getInt() {
-
-    int rlt = httpTestClient.getInt();
-    log.info("rlt1:" + rlt);
-  }
-
-  /**
-   * post 无参数请求
-   */
-  @Test
-  public void postTest2() {
-    String rlt = httpTestClient.post();
-    log.info("rlt1:" + rlt);
-  }
-
-  /**
-   * get 请求
-   */
-  @Test
-  public void getTest() {
-    String rlt = httpTestClient.getLogin("src/main/resources/httpClient", "12345678");
-    log.info("rlt1:" + rlt);
-    LoginParam p = new LoginParam();
-    p.setPassword("12345678");
-    p.setName("src/main/resources/httpClient");
-    rlt = httpTestClient.getLogin(p);
-    log.info("rlt1:" + rlt);
-  }
-
-  /**
-   * 文件上传
-   *
-   * @throws FileNotFoundException
-   */
-  @Test
-  public void uploadFile() throws FileNotFoundException {
-    File file = FileUtil.getFile("src/test/resources/file/fileTest.txt");
-    String rlt = httpTestClient.uploadFile(file, "uploadFile");
-    log.info("rlt1:" + rlt);
-  }
-
-  /**
-   * 文件下载
-   */
-  @Test
-  public void downloadFileTest() throws Exception {
-    HttpRequestUrl httpUrl = new HttpRequestUrl("http://127.0.0.1:8080/file/downloadFile");
-
-    File file = httpDownloadClient.downloadFile(httpUrl, null, new DownloadFileParam("123"));
-    String s = new String(getByte(new FileInputStream(file)), StandardCharsets.UTF_8);
-    log.info("downloadFileTest test:" + s);
-  }
-
-  public byte[] getByte(InputStream inputStream) throws IOException {
-    ByteArrayOutputStream output = new ByteArrayOutputStream();
-    byte[] buffer = new byte[4096];
-    int n = 0;
-    while (-1 != (n = inputStream.read(buffer))) {
-      output.write(buffer, 0, n);
+    /**
+     * post 请求
+     */
+    @Test
+    public void postTest() {
+        LoginParam p = new LoginParam();
+        p.setPassword("12345678");
+        p.setName("src/main/resources/httpClient");
+        HttpResult<LoginParam> param = httpPropertyTestClient.postLogin(p);
+        log.info("rlt1:" + JSON.toJSONString(param));
+        String rlt = httpTestClient.postLogin(p);
+        log.info("rlt1:" + rlt);
     }
-    return output.toByteArray();
-  }
+
+    /**
+     * post 请求
+     */
+    @Test
+    public void getDouble() {
+        double rlt = httpTestClient.getDouble();
+        log.info("rlt1:" + rlt);
+    }
+
+    /**
+     * get 请求
+     */
+    @Test
+    public void getInt() {
+
+        int rlt = httpTestClient.getInt();
+        log.info("rlt1:" + rlt);
+    }
+
+    /**
+     * post 无参数请求
+     */
+    @Test
+    public void postTest2() {
+        String rlt = httpTestClient.post();
+        log.info("rlt1:" + rlt);
+    }
+
+    /**
+     * get 请求
+     */
+    @Test
+    public void getTest() {
+        String rlt = httpTestClient.getLogin("src/main/resources/httpClient", "12345678");
+        log.info("rlt1:" + rlt);
+        LoginParam p = new LoginParam();
+        p.setPassword("12345678");
+        p.setName("src/main/resources/httpClient");
+        rlt = httpTestClient.getLogin(p);
+        log.info("rlt1:" + rlt);
+    }
+
+    /**
+     * 文件上传
+     *
+     * @throws FileNotFoundException
+     */
+    @Test
+    public void uploadFile() throws FileNotFoundException {
+        File file = FileUtil.getFile("src/test/resources/file/fileTest.txt");
+        String rlt = httpTestClient.uploadFile(file, "uploadFile");
+        log.info("rlt1:" + rlt);
+    }
+
+    /**
+     * 文件下载
+     */
+    @Test
+    public void downloadFileTest() throws Exception {
+        HttpRequestUrl httpUrl = new HttpRequestUrl("http://127.0.0.1:8080/file/downloadFile");
+
+        File file = httpDownloadClient.downloadFile(httpUrl, null, new DownloadFileParam("123"));
+        String s = new String(getByte(new FileInputStream(file)), StandardCharsets.UTF_8);
+        log.info("downloadFileTest test:" + s);
+    }
+
+    public byte[] getByte(InputStream inputStream) throws IOException {
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        byte[] buffer = new byte[4096];
+        int n = 0;
+        while (-1 != (n = inputStream.read(buffer))) {
+            output.write(buffer, 0, n);
+        }
+        return output.toByteArray();
+    }
 
 }
