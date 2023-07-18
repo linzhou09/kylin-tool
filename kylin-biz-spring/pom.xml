@@ -15,7 +15,6 @@
     <modules>
         <module>kylin-spring-parent</module>
         <module>kylin-spring-utils</module>
-        <module>kylin-spring-web</module>
     </modules>
 
     <properties>

@@ -7,7 +7,7 @@ import com.kylin.http.client.biz.response.HttpResult;
 import com.kylin.http.client.controller.DownloadFileParam;
 import com.kylin.spring.utils.utils.file.FileUtil;
 import lombok.extern.log4j.Log4j2;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.ByteArrayOutputStream;
