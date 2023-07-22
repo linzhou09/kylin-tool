@@ -13,7 +13,6 @@
         <module>kylin-biz-spring</module>
         <module>kylin-http-client</module>
         <module>kylin-lock</module>
-        <module>kylin-cache</module>
     </modules>
 
     <properties>
