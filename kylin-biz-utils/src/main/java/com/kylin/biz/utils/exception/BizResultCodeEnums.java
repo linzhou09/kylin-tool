@@ -1,7 +1,5 @@
 package com.kylin.biz.utils.exception;
 
-import com.kylin.biz.utils.exception.ExceptionResultCode;
-
 /**
  * CopyRight (c) : www.wwlcargo.com
  * Project :  kylin-tool
