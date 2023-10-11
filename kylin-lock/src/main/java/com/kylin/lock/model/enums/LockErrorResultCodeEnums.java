@@ -1,6 +1,6 @@
 package com.kylin.lock.model.enums;
 
-import com.kylin.biz.utils.model.bo.exception.ExceptionResultCode;
+import com.kylin.biz.utils.exception.ExceptionResultCode;
 import lombok.Getter;
 
 /**

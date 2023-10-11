@@ -2,7 +2,7 @@ package com.kylin.spring.utils;
 
 
 import com.kylin.biz.utils.exception.BizException;
-import com.kylin.biz.utils.model.bo.exception.ExceptionResultCode;
+import com.kylin.biz.utils.exception.ExceptionResultCode;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;

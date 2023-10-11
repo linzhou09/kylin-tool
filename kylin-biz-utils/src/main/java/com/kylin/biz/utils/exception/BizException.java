@@ -1,7 +1,5 @@
 package com.kylin.biz.utils.exception;
 
-import com.kylin.biz.utils.model.bo.exception.ExceptionResultCode;
-
 import java.util.IllegalFormatException;
 
 /**

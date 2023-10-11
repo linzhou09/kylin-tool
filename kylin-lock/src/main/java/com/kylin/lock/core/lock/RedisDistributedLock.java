@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -86,11 +87,15 @@ public class RedisDistributedLock implements DistributedLock<RedisLockResult> {
     }
 
     @Override
-    public void unLock(RedisLockResult lockResult) {
-        if (Objects.isNull(lockResult) || Objects.isNull(lockResult.getLock()) ||
-                !(lockResult.getLock().isLocked() && lockResult.getLock().isHeldByCurrentThread())) {
-            return;
+    public boolean unLock(RedisLockResult lockResult) {
+        RLock rLock = Optional.ofNullable(lockResult)
+                .map(RedisLockResult::getLock)
+                .orElse(null);
+        if (Objects.isNull(rLock) || rLock.isHeldByCurrentThread()) {
+            log.error("RedisDistributedLock unLock non execution,lockResult:{},isHeldByCurrentThread:{}", lockResult, Objects.nonNull(rLock) ? rLock.isHeldByCurrentThread() : null);
+            return false;
         }
-        lockResult.getLock().unlock();
+        rLock.unlock();
+        return true;
     }
 }

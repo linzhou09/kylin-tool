@@ -1,7 +1,6 @@
 package com.kylin.lock.aspect;
 
 
-
 import com.kylin.biz.utils.exception.BizException;
 import com.kylin.lock.annotations.Lock;
 import com.kylin.lock.core.key.DistributedKey;
@@ -41,7 +40,7 @@ public class LockAspect {
         //获取分布式锁的key
         List<String> redisKeyList = getRedisKey(joinPoint, lock);
         if (CollectionUtils.isEmpty(redisKeyList)) {
-            log.error("未获取到分布式锁key,跳过加锁逻辑，redisKey：{}", redisKeyList);
+            log.info("distributedLock keyList is empty,skip lock，keyList：{}", redisKeyList);
             return joinPoint.proceed();
         }
 
@@ -52,16 +51,16 @@ public class LockAspect {
         BaseLockResult lockResultBo = distributedLock.lock(lockContext);
         try {
             if (Objects.isNull(lockResultBo)) {
-                log.error("分布式锁获取失败，redisKey：{}", redisKeyList);
+                log.error("distributedLock lock error，keyList：{}", redisKeyList);
                 throw new BizException(LockErrorResultCodeEnums.FREQUENT);
             } else {
-                log.info("分布式锁获取成功，redisKey：{}", redisKeyList);
+                log.info("distributedLock lock success，keyList：{}", redisKeyList);
             }
             return joinPoint.proceed();
         } finally {
             if (Objects.nonNull(lockResultBo)) {
-                distributedLock.unLock(lockResultBo);
-                log.info("分布式锁释放成功，redisKey：{}", redisKeyList);
+                boolean unLockResult = distributedLock.unLock(lockResultBo);
+                log.info("distributedLock unLockResult:{}，keyList：{}", unLockResult, redisKeyList);
             }
         }
     }

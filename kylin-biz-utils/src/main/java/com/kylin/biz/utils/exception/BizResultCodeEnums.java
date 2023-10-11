@@ -1,6 +1,6 @@
-package com.kylin.biz.utils.model.enums.exception;
+package com.kylin.biz.utils.exception;
 
-import com.kylin.biz.utils.model.bo.exception.ExceptionResultCode;
+import com.kylin.biz.utils.exception.ExceptionResultCode;
 
 /**
  * CopyRight (c) : www.wwlcargo.com

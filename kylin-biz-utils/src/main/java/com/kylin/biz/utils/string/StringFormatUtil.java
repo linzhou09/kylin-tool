@@ -3,7 +3,7 @@ package com.kylin.biz.utils.string;
 
 import com.kylin.biz.utils.model.bo.kylin.param.KylinParamInfo;
 import com.kylin.biz.utils.exception.BizException;
-import com.kylin.biz.utils.model.enums.exception.BizResultCodeEnums;
+import com.kylin.biz.utils.exception.BizResultCodeEnums;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;

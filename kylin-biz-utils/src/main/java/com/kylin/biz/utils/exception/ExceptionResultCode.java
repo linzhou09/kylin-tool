@@ -1,4 +1,4 @@
-package com.kylin.biz.utils.model.bo.exception;
+package com.kylin.biz.utils.exception;
 
 /**
  * CopyRight : <company domain>

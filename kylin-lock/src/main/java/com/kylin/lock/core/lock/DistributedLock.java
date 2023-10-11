@@ -24,5 +24,5 @@ public interface DistributedLock<T extends BaseLockResult>{
    *
    * @param lockResult
    */
-  void unLock(T lockResult);
+  boolean unLock(T lockResult);
 }
