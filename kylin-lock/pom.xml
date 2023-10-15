@@ -23,7 +23,7 @@
     <dependencies>
 
         <dependency>
-            <groupId>com.kylin.spring</groupId>
+            <groupId>org.kylin</groupId>
             <artifactId>kylin-spring-utils</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>

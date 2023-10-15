@@ -8,7 +8,9 @@
         <artifactId>kylin-tool</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
+    <groupId>org.kylin</groupId>
     <artifactId>kylin-biz-utils</artifactId>
+    <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <properties>
