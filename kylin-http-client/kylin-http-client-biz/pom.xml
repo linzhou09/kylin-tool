@@ -22,14 +22,14 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.kylin.utils</groupId>
+            <groupId>org.kylin</groupId>
             <artifactId>kylin-biz-utils</artifactId>
             <version>${kylin-biz-utils.version}</version>
         </dependency>
 
 
         <dependency>
-            <groupId>com.kylin.spring</groupId>
+            <groupId>org.kylin</groupId>
             <artifactId>kylin-spring-utils</artifactId>
             <version>${kylin-spring-utils.version}</version>
         </dependency>
