@@ -22,6 +22,7 @@ public enum LockErrorResultCodeEnums implements ExceptionResultCode {
    */
   FREQUENT("900001", "请求太频繁了,请稍后再试"),
   NOT_FIND_PARAM_VALUE("900002", "分布式锁key获取失败，找不到参数：%s"),
+  LOCK_KEY_FORMAT_ERROR_NOT_FIND_PARAM("900003", "字符串格式化失败，找不到参数：%s!"),
   /****************************************************************************/
   ;
 

@@ -1,13 +1,21 @@
 package com.kylin.lock.core.key;
 
 
-import com.kylin.biz.utils.common.annotations.KylinParam;
-import com.kylin.biz.utils.model.bo.kylin.param.KylinParamInfo;
-import com.kylin.biz.utils.reflect.ReflectUtil;
-import com.kylin.biz.utils.string.StringFormatUtil;
+
 import com.kylin.lock.annotations.Lock;
+import com.kylin.lock.model.param.LockParamInfo;
+import com.kylin.lock.utils.LockKeyFormatUtil;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.context.expression.BeanFactoryResolver;
+import org.springframework.context.expression.MethodBasedEvaluationContext;
+import org.springframework.core.DefaultParameterNameDiscoverer;
+import org.springframework.core.ParameterNameDiscoverer;
+import org.springframework.expression.BeanResolver;
+import org.springframework.expression.ExpressionParser;
+import org.springframework.expression.spel.standard.SpelExpressionParser;
+import org.springframework.expression.spel.support.StandardEvaluationContext;
 import org.springframework.stereotype.Component;
 
 import java.lang.annotation.Annotation;
@@ -30,6 +38,15 @@ public class DefaultDistributedKey implements DistributedKey {
      */
     private static final Pattern FIELD_NAME_PATTERN = Pattern.compile("\\{.*?}");
 
+    private static final ParameterNameDiscoverer NAME_DISCOVERER = new DefaultParameterNameDiscoverer();
+
+    private static final ExpressionParser PARSER = new SpelExpressionParser();
+
+    private BeanResolver beanResolver;
+    public DefaultDistributedKey(BeanFactory beanFactory) {
+        this.beanResolver = new BeanFactoryResolver(beanFactory);
+    }
+
     @Override
     public List<String> getKey(ProceedingJoinPoint joinPoint, Lock lock) throws IllegalAccessException {
         String[] key = lock.key();
@@ -38,15 +55,10 @@ public class DefaultDistributedKey implements DistributedKey {
         }
 
         List<String> keyList = Arrays.asList(key);
-        //获取key中变量
-        Set<String> fieldNames = StringFormatUtil.getParamNamesByKeys(keyList);
-        if (fieldNames.isEmpty()) {
-            return keyList;
-        }
 
-        List<KylinParamInfo> kylinParamInfoList = getParamInfos(joinPoint);
+        List<LockParamInfo> lockParamInfoList = getParamInfos(joinPoint,lock);
 
-        return StringFormatUtil.buildDistributedKeyList(keyList, kylinParamInfoList);
+        return LockKeyFormatUtil.buildDistributedKeyList(keyList, lockParamInfoList);
     }
 
 
@@ -56,53 +68,42 @@ public class DefaultDistributedKey implements DistributedKey {
      * @param joinPoint
      * @return
      */
-    private List<KylinParamInfo> getParamInfos(ProceedingJoinPoint joinPoint) {
-
-        Object[] args = joinPoint.getArgs();
-        if (Objects.isNull(args) || args.length == 0) {
-            return new ArrayList<>();
-        }
-
+    private List<LockParamInfo> getParamInfos(ProceedingJoinPoint joinPoint, Lock lock) {
         //获取方法，此处可将signature强转为MethodSignature
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         Method method = signature.getMethod();
+        Object[] args = joinPoint.getArgs();
+        Object rootObject = joinPoint.getThis();
 
-        Annotation[][] parameterAnnotations = method.getParameterAnnotations();
+        StandardEvaluationContext context = new MethodBasedEvaluationContext(rootObject, method, args, NAME_DISCOVERER);
+        context.setBeanResolver(beanResolver);
 
-        List<KylinParamInfo> rlt = new ArrayList<>();
-        for (int i = 0; i < args.length; i++) {
-            Object arg = args[i];
-            if (isBasicClass(arg)) {
-                KylinParam param = ReflectUtil.getAnnotation(parameterAnnotations[i], KylinParam.class);
-                if (Objects.nonNull(param)) {
-                    rlt.add(new KylinParamInfo(arg, param.value(), param));
-                } else {
-                    rlt.add(new KylinParamInfo(arg, "param" + i, null));
+        String[] param = lock.param();
+
+        List<LockParamInfo> rlt = new ArrayList<>();
+
+        if (Objects.nonNull(param)){
+
+            for (String paramName : param) {
+                if (paramName != null && !paramName.isEmpty()) {
+
+
+                    String[] split = paramName.split(":");
+
+                    String keyName = split[0];
+                    String pName = keyName;
+                    if (split.length > 1){
+                        pName = split[1];
+                    }
+
+                    String value = PARSER.parseExpression(pName).getValue(context, String.class);
+
+
+
+                    rlt.add(new LockParamInfo(keyName, value));
                 }
-            } else {
-                List<KylinParamInfo> kylinParamInfos = ReflectUtil.getKylinParamInfos(arg);
-                rlt.addAll(kylinParamInfos);
             }
         }
         return rlt;
-    }
-
-
-    /**
-     * 是否是基础类型
-     *
-     * @param o
-     * @return
-     */
-    protected boolean isBasicClass(Object o) {
-        if (o instanceof Integer
-                || o instanceof String
-                || o instanceof Double
-                || o instanceof Float
-                || o instanceof Long
-                || o instanceof BigDecimal) {
-            return true;
-        }
-        return false;
     }
 }
